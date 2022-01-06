@@ -1,0 +1,15 @@
+emails_db = pd.read_excel("Pasta1.xlsx")
+    
+outlook = win32.Dispatch('outlook.application')
+for i, Anexo in enumerate(emails_db['Anexo']):
+    destinatario = emails_db.loc[i, "Email"]
+    titulo = emails_db.loc[i, "Título"]
+    corpo = emails_db.loc[i, "Mensagem"]
+    anexo = emails_db.loc[i, "Anexo"]
+    
+email = outlook.CreateItem(0)
+email.To = destinatario
+email.Subject = titulo
+email.HTMLBody = corpo
+email.Attachments.Add = f"(C:/Users/UREBORO/Desktop/Teste Email Automático - Python/{anexo})"
+email.Send()
